@@ -31,7 +31,7 @@ EOT
     marketplace_subscription = string
     name                     = string
     resource_group_name      = string
-    monitoring_enabled       = optional(bool, true)
+    monitoring_enabled       = optional(bool) # Default: true
     tags                     = optional(map(string))
     identity = object({
       type = string
