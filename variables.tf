@@ -48,11 +48,11 @@ EOT
       last_name    = string
       phone_number = optional(string)
     })
-    environment_properties = optional(object({
-      environment_info = object({
+    environment_properties = optional(list(object({
+      environment_info = list(object({
         environment_id = string
-      })
-    }))
+      }))
+    })))
   }))
 }
 

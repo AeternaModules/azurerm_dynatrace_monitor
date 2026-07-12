@@ -27,10 +27,13 @@ resource "azurerm_dynatrace_monitor" "dynatrace_monitors" {
   }
 
   dynamic "environment_properties" {
-    for_each = each.value.environment_properties != null ? [each.value.environment_properties] : []
+    for_each = each.value.environment_properties != null ? each.value.environment_properties : []
     content {
-      environment_info {
-        environment_id = environment_properties.value.environment_info.environment_id
+      dynamic "environment_info" {
+        for_each = environment_properties.value.environment_info
+        content {
+          environment_id = environment_info.value.environment_id
+        }
       }
     }
   }
