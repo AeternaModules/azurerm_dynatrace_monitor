@@ -1,3 +1,7 @@
+output "dynatrace_monitors_id" {
+  description = "Map of id values across all dynatrace_monitors, keyed the same as var.dynatrace_monitors"
+  value       = { for k, v in azurerm_dynatrace_monitor.dynatrace_monitors : k => v.id }
+}
 output "dynatrace_monitors_environment_properties" {
   description = "Map of environment_properties values across all dynatrace_monitors, keyed the same as var.dynatrace_monitors"
   value       = { for k, v in azurerm_dynatrace_monitor.dynatrace_monitors : k => v.environment_properties }
