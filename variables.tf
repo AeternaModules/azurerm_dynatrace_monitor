@@ -31,7 +31,7 @@ EOT
     marketplace_subscription = string
     name                     = string
     resource_group_name      = string
-    monitoring_enabled       = optional(bool) # Default: true
+    monitoring_enabled       = optional(bool)
     tags                     = optional(map(string))
     identity = object({
       type = string
@@ -54,5 +54,13 @@ EOT
       }))
     })))
   }))
+  validation {
+    condition = alltrue([
+      for k, v in var.dynatrace_monitors : (
+        v.environment_properties == null || alltrue([for item in v.environment_properties : (length(item.environment_info) >= 1)])
+      )
+    ])
+    error_message = "Each environment_info list must contain at least 1 items"
+  }
 }
 
