@@ -8,7 +8,7 @@ output "dynatrace_monitors_environment_properties" {
 }
 output "dynatrace_monitors_identity" {
   description = "Map of identity values across all dynatrace_monitors, keyed the same as var.dynatrace_monitors"
-  value       = { for k, v in azurerm_dynatrace_monitor.dynatrace_monitors : k => v.identity if v.identity != null && length(v.identity) > 0 }
+  value       = { for k, v in azurerm_dynatrace_monitor.dynatrace_monitors : k => one(v.identity) if v.identity != null && length(v.identity) > 0 }
 }
 output "dynatrace_monitors_location" {
   description = "Map of location values across all dynatrace_monitors, keyed the same as var.dynatrace_monitors"
@@ -28,7 +28,7 @@ output "dynatrace_monitors_name" {
 }
 output "dynatrace_monitors_plan" {
   description = "Map of plan values across all dynatrace_monitors, keyed the same as var.dynatrace_monitors"
-  value       = { for k, v in azurerm_dynatrace_monitor.dynatrace_monitors : k => v.plan if v.plan != null && length(v.plan) > 0 }
+  value       = { for k, v in azurerm_dynatrace_monitor.dynatrace_monitors : k => one(v.plan) if v.plan != null && length(v.plan) > 0 }
 }
 output "dynatrace_monitors_resource_group_name" {
   description = "Map of resource_group_name values across all dynatrace_monitors, keyed the same as var.dynatrace_monitors"
@@ -40,6 +40,6 @@ output "dynatrace_monitors_tags" {
 }
 output "dynatrace_monitors_user" {
   description = "Map of user values across all dynatrace_monitors, keyed the same as var.dynatrace_monitors"
-  value       = { for k, v in azurerm_dynatrace_monitor.dynatrace_monitors : k => v.user if v.user != null && length(v.user) > 0 }
+  value       = { for k, v in azurerm_dynatrace_monitor.dynatrace_monitors : k => one(v.user) if v.user != null && length(v.user) > 0 }
 }
 
